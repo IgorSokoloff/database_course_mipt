@@ -163,7 +163,7 @@ ALTER TABLE [Город]
 CREATE TABLE [Улица] (
 	Улица_ид INTEGER NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	Город_ид INTEGER NOT NULL,--fk
-	Название VARCHAR(150) NOT NULL,
+	Название VARCHAR(150) NOT NULL UNIQUE,
 );
 
 
@@ -367,8 +367,8 @@ CREATE TABLE [Спортсмен] (
 	Телефон_моб				VARCHAR(12),
 	Эл_почта				VARCHAR(256),
 	Улица_ид				INTEGER,--fk
-	Дом						INTEGER,
-	Корпус					VARCHAR(3),
+	Дом						VARCHAR(10),
+	Корпус					VARCHAR(3) default 1,
 	Свидетельство_о_рождении VARCHAR(10),
 );
 
@@ -416,7 +416,7 @@ CREATE TABLE [Тренер] (
 	Телефон_моб				VARCHAR(12),
 	Эл_почта				VARCHAR(256),
 	Улица_ид				INTEGER,--fk
-	Дом						INTEGER,
+	Дом						VARCHAR(10),
 	Корпус					VARCHAR(3),
 );
 
@@ -554,7 +554,7 @@ CREATE TABLE [Награды_спортсмен] (
 	Награда_ид		INTEGER NOT NULL,
 	Дата_привоения	DATE    NOT NULL,
 	Турнир_ид		INTEGER NOT NULL,
-	Размер_выплаты	MONEY NOT NULL,
+	Размер_выплаты	MONEY NOT NULL default (0),
   PRIMARY KEY(Спортсмен_ид, Награда_ид, Дата_привоения)
 
 );
@@ -579,7 +579,7 @@ ON DELETE NO ACTION
 
 ALTER TABLE[Награды_спортсмен]
 ADD CONSTRAINT check_prize
-CHECK (Размер_выплаты>0 AND
+CHECK (Размер_выплаты>=0 AND
 	   [Дата_привоения]>'01-01-2004'
 	  )
 
@@ -728,7 +728,7 @@ ALTER TABLE [Награды_команда]
 ADD CONSTRAINT [Награды_команда_fk1] FOREIGN KEY ([Награда_ид])
 REFERENCES [Награда]([Награда_ид])
 ON UPDATE CASCADE
-ON DELETE NO ACTION
+ON DELETE CASCADE
 
 ALTER TABLE [Награды_команда] 
 ADD CONSTRAINT [Награды_команда_fk2] FOREIGN KEY ([Турнир_ид]) 
@@ -899,7 +899,7 @@ CREATE TABLE [Судья] (
 	Дата_рождения		 DATE,
 	Пасспорт_серия_номер VARCHAR(10),
 	Улица_ид			 INTEGER,
-	Дом					 INTEGER,
+	Дом					 VARCHAR(10),
 	Корпус				 VARCHAR(3),
 	Телефон_дом			 VARCHAR(12),
 	Телефон_моб			 VARCHAR(12),
