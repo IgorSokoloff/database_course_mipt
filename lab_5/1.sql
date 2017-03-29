@@ -40,7 +40,8 @@ inner join Команда on t1.Команда_ид = Команда.Команда_ид
 order by Очки desc
 
 
-
+/*
 declare @a time
 set @a = (select substring(CONVERT(varchar(25), cast(120.0/(60*24) as datetime), 120), 12, 8))
 select @a
+*/

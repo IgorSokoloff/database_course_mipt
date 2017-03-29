@@ -1,44 +1,14 @@
-IF EXISTS(
-SELECT * FROM sys.views
-WHERE [name] = 'Игра_счет' AND
- schema_id = SCHEMA_ID('dbo'))
+IF OBJECT_ID('Игра_счет') IS NOT NULL
 DROP VIEW Игра_счет
 
-IF EXISTS(
-SELECT * FROM sys.views
-WHERE [name] = 'Команда_поражения' AND
- schema_id = SCHEMA_ID('dbo'))
+IF OBJECT_ID('Команда_поражения') IS NOT NULL
 DROP VIEW Команда_поражения
 
-IF EXISTS(
-SELECT * FROM sys.views
-WHERE [name] = 'Команда_победа' AND
- schema_id = SCHEMA_ID('dbo'))
+IF OBJECT_ID('Команда_победа') IS NOT NULL
 DROP VIEW Команда_победа
 
-IF EXISTS(
-SELECT * FROM sys.views
-WHERE [name] = 'Команда_игры' AND
- schema_id = SCHEMA_ID('dbo'))
+IF OBJECT_ID('Команда_игры') IS NOT NULL
 DROP VIEW Команда_игры
-
-with table1 (Команда_ид, Игра_ид, Счет) as
-(
-select Сет_команда.Команда_ид, Сет.Игра_ид, count(Сет_команда.Сет_ид) as Счет
-from Сет_команда inner join сет on Сет_команда.Сет_ид = Сет.Сет_ид
-				 inner join Итог on Сет_команда.Итог = Итог.Итог_ид
-			     where Итог.Название like 'Победа'
-				 group by Сет_команда.Команда_ид, сет.Игра_ид
-)
-select Команда.Название as Команда, Игра.Название as Игра,Итог.Название as Итог, Счет, Игра.Номер_тура, Турнир.Название as Турнир
-from Игра_команда inner join Команда on Игра_команда.Команда_ид = Команда.Команда_ид
-				  inner join Игра on Игра.Игра_ид = Игра_команда.Игра_ид
-				  inner join Итог on Игра_команда.Итог = Итог.Итог_ид
-				  inner join Стадия on Игра.Стадия_ид = Стадия.Стадия_ид
-				  inner join Турнир on Стадия.Турнир_ид = Турнир.Турнир_ид
-				  inner join table1 on (Игра_команда.Игра_ид = table1.Игра_ид and
-										Игра_команда.Команда_ид = table1.Команда_ид
-										)
 
 --сколько сетов команда проиграла в каждой игре за все время
 GO
