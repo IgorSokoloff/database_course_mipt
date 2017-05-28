@@ -1,5 +1,5 @@
---Определить количество количество покупателей, приобретенных в 1990 году.
---(сколько добавилось новых покупателей)
+п»ї--РћРїСЂРµРґРµР»РёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕР»РёС‡РµСЃС‚РІРѕ РїРѕРєСѓРїР°С‚РµР»РµР№, РїСЂРёРѕР±СЂРµС‚РµРЅРЅС‹С… РІ 1990 РіРѕРґСѓ.
+--(СЃРєРѕР»СЊРєРѕ РґРѕР±Р°РІРёР»РѕСЃСЊ РЅРѕРІС‹С… РїРѕРєСѓРїР°С‚РµР»РµР№)
 
 SELECT COUNT(customer_id) number FROM customer
 WHERE customer_id IN 
@@ -14,7 +14,7 @@ SELECT customer.customer_id
 		HAVING MIN(order_date) > '1989-31-12' AND MIN(order_date) < '1991-01-01'
 
 --task
---переписать без group by и  having
+--РїРµСЂРµРїРёСЃР°С‚СЊ Р±РµР· group by Рё  having
 SELECT COUNT(customer_id) number FROM customer
 WHERE customer_id IN
 (

@@ -1,4 +1,4 @@
---Какой покупатель за все время закупил товара, в названии которого имеется слово'DUNK' на наибольшую сумму.
+п»ї--РљР°РєРѕР№ РїРѕРєСѓРїР°С‚РµР»СЊ Р·Р° РІСЃРµ РІСЂРµРјСЏ Р·Р°РєСѓРїРёР» С‚РѕРІР°СЂР°, РІ РЅР°Р·РІР°РЅРёРё РєРѕС‚РѕСЂРѕРіРѕ РёРјРµРµС‚СЃСЏ СЃР»РѕРІРѕ'DUNK' РЅР° РЅР°РёР±РѕР»СЊС€СѓСЋ СЃСѓРјРјСѓ.
 --0
 SELECT TOP(1) with ties CUSTOMER.Name, sum(item.total) AS TOTAL
 FROM customer INNER JOIN sales_order ON customer.customer_id = sales_order.customer_id
@@ -38,7 +38,7 @@ FROM customer INNER JOIN sales_order ON customer.customer_id = sales_order.custo
 			  GROUP BY customer.Name
 			  HAVING sum(item.total) = @total
 
---без лок пер и top with ties
+--Р±РµР· Р»РѕРє РїРµСЂ Рё top with ties
 
 
 WITH TABLE1(name, total) AS
@@ -56,7 +56,7 @@ where total = (select max(total) from TABLE1)
 
 
 
---вывести среднее значение зарплат всех сотрудников которые работают в далласе + комиссия 
+--РІС‹РІРµСЃС‚Рё СЃСЂРµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ Р·Р°СЂРїР»Р°С‚ РІСЃРµС… СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ РєРѕС‚РѕСЂС‹Рµ СЂР°Р±РѕС‚Р°СЋС‚ РІ РґР°Р»Р»Р°СЃРµ + РєРѕРјРёСЃСЃРёСЏ 
 
 select avg(EMPLOYEE.salary) as avg 
 from employee inner join DEPARTMENT on DEPARTMENT.department_id = EMPLOYEE.department_id
@@ -66,5 +66,5 @@ from employee inner join DEPARTMENT on DEPARTMENT.department_id = EMPLOYEE.depar
 
 
 
---(не дописал, ответил на словах) 
---кароче там надо учесть что у кого-то комисия может быть null и писать два запроса через UNION
+--(РЅРµ РґРѕРїРёСЃР°Р», РѕС‚РІРµС‚РёР» РЅР° СЃР»РѕРІР°С…) 
+--РєР°СЂРѕС‡Рµ С‚Р°Рј РЅР°РґРѕ СѓС‡РµСЃС‚СЊ С‡С‚Рѕ Сѓ РєРѕРіРѕ-С‚Рѕ РєРѕРјРёСЃРёСЏ РјРѕР¶РµС‚ Р±С‹С‚СЊ null Рё РїРёСЃР°С‚СЊ РґРІР° Р·Р°РїСЂРѕСЃР° С‡РµСЂРµР· UNION
