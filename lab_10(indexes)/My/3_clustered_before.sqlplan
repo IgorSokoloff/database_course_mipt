@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<ShowPlanXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2" Build="11.0.5058.0" xmlns="http://schemas.microsoft.com/sqlserver/2004/07/showplan">
+  <BatchSequence>
+    <Batch>
+      <Statements>
+        <StmtSimple StatementCompId="1" StatementEstRows="55.4342" StatementId="1" StatementOptmLevel="FULL" StatementOptmEarlyAbortReason="GoodEnoughPlanFound" StatementSubTreeCost="0.0611507" StatementText="select ContactName, CompanyName, city,country, OrderDate from Orders &#xD;&#xA;inner join Customers on orders.CustomerID = customers.CustomerID&#xD;&#xA;where (OrderDate BETWEEN '1997-01-01' AND '1997-12-31') and&#xD;&#xA;city = 'San Francisco'&#xD;&#xA;" StatementType="SELECT" QueryHash="0xC953B48D547FE6B" QueryPlanHash="0x60FA0FC0D51FCB83" RetrievedFromCache="true">
+          <StatementSetOptions ANSI_NULLS="true" ANSI_PADDING="true" ANSI_WARNINGS="true" ARITHABORT="true" CONCAT_NULL_YIELDS_NULL="true" NUMERIC_ROUNDABORT="false" QUOTED_IDENTIFIER="true" />
+          <QueryPlan DegreeOfParallelism="1" CachedPlanSize="24" CompileTime="3" CompileCPU="3" CompileMemory="320">
+            <MissingIndexes>
+              <MissingIndexGroup Impact="45.475">
+                <MissingIndex Database="[lab_10]" Schema="[dbo]" Table="[Customers]">
+                  <ColumnGroup Usage="EQUALITY">
+                    <Column Name="[City]" ColumnId="6" />
+                  </ColumnGroup>
+                </MissingIndex>
+              </MissingIndexGroup>
+            </MissingIndexes>
+            <MemoryGrantInfo SerialRequiredMemory="0" SerialDesiredMemory="0" />
+            <OptimizerHardwareDependentProperties EstimatedAvailableMemoryGrant="208277" EstimatedPagesCached="52069" EstimatedAvailableDegreeOfParallelism="2" />
+            <RelOp AvgRowSize="126" EstimateCPU="0.000231715" EstimateIO="0" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="55.4342" LogicalOp="Inner Join" NodeId="0" Parallel="false" PhysicalOp="Nested Loops" EstimatedTotalSubtreeCost="0.0611507">
+              <OutputList>
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Orders]" Column="OrderDate" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CompanyName" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="ContactName" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="City" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Country" />
+              </OutputList>
+              <RunTimeInformation>
+                <RunTimeCountersPerThread Thread="0" ActualRows="36" ActualEndOfScans="1" ActualExecutions="1" />
+              </RunTimeInformation>
+              <NestedLoops Optimized="false">
+                <OuterReferences>
+                  <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CustomerID" />
+                </OuterReferences>
+                <RelOp AvgRowSize="128" EstimateCPU="0.0013582" EstimateIO="0.0297917" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="12" LogicalOp="Clustered Index Scan" NodeId="1" Parallel="false" PhysicalOp="Clustered Index Scan" EstimatedTotalSubtreeCost="0.0311499" TableCardinality="1092">
+                  <OutputList>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CustomerID" />
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CompanyName" />
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="ContactName" />
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="City" />
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Country" />
+                  </OutputList>
+                  <RunTimeInformation>
+                    <RunTimeCountersPerThread Thread="0" ActualRows="12" ActualEndOfScans="1" ActualExecutions="1" />
+                  </RunTimeInformation>
+                  <IndexScan Ordered="false" ForcedIndex="false" ForceScan="false" NoExpandHint="false">
+                    <DefinedValues>
+                      <DefinedValue>
+                        <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CustomerID" />
+                      </DefinedValue>
+                      <DefinedValue>
+                        <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CompanyName" />
+                      </DefinedValue>
+                      <DefinedValue>
+                        <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="ContactName" />
+                      </DefinedValue>
+                      <DefinedValue>
+                        <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="City" />
+                      </DefinedValue>
+                      <DefinedValue>
+                        <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Country" />
+                      </DefinedValue>
+                    </DefinedValues>
+                    <Object Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Index="[Customer_clustered]" IndexKind="Clustered" />
+                    <Predicate>
+                      <ScalarOperator ScalarString="[lab_10].[dbo].[Customers].[City]=N'San Francisco'">
+                        <Compare CompareOp="EQ">
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="City" />
+                            </Identifier>
+                          </ScalarOperator>
+                          <ScalarOperator>
+                            <Const ConstValue="N'San Francisco'" />
+                          </ScalarOperator>
+                        </Compare>
+                      </ScalarOperator>
+                    </Predicate>
+                  </IndexScan>
+                </RelOp>
+                <RelOp AvgRowSize="15" EstimateCPU="0.000167258" EstimateIO="0.003125" EstimateRebinds="10.9381" EstimateRewinds="0.0618861" EstimatedExecutionMode="Row" EstimateRows="4.61952" LogicalOp="Clustered Index Seek" NodeId="2" Parallel="false" PhysicalOp="Clustered Index Seek" EstimatedTotalSubtreeCost="0.0291465" TableCardinality="830">
+                  <OutputList>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Orders]" Column="OrderDate" />
+                  </OutputList>
+                  <RunTimeInformation>
+                    <RunTimeCountersPerThread Thread="0" ActualRows="36" ActualEndOfScans="12" ActualExecutions="12" />
+                  </RunTimeInformation>
+                  <IndexScan Ordered="true" ScanDirection="FORWARD" ForcedIndex="false" ForceSeek="false" ForceScan="false" NoExpandHint="false" Storage="RowStore">
+                    <DefinedValues>
+                      <DefinedValue>
+                        <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Orders]" Column="OrderDate" />
+                      </DefinedValue>
+                    </DefinedValues>
+                    <Object Database="[lab_10]" Schema="[dbo]" Table="[Orders]" Index="[Orders_clustered]" IndexKind="Clustered" />
+                    <SeekPredicates>
+                      <SeekPredicateNew>
+                        <SeekKeys>
+                          <Prefix ScanType="EQ">
+                            <RangeColumns>
+                              <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Orders]" Column="CustomerID" />
+                            </RangeColumns>
+                            <RangeExpressions>
+                              <ScalarOperator ScalarString="[lab_10].[dbo].[Customers].[CustomerID]">
+                                <Identifier>
+                                  <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CustomerID" />
+                                </Identifier>
+                              </ScalarOperator>
+                            </RangeExpressions>
+                          </Prefix>
+                        </SeekKeys>
+                      </SeekPredicateNew>
+                    </SeekPredicates>
+                    <Predicate>
+                      <ScalarOperator ScalarString="[lab_10].[dbo].[Orders].[OrderDate]&gt;='1997-01-01 00:00:00.000' AND [lab_10].[dbo].[Orders].[OrderDate]&lt;='1997-12-31 00:00:00.000'">
+                        <Logical Operation="AND">
+                          <ScalarOperator>
+                            <Compare CompareOp="GE">
+                              <ScalarOperator>
+                                <Identifier>
+                                  <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Orders]" Column="OrderDate" />
+                                </Identifier>
+                              </ScalarOperator>
+                              <ScalarOperator>
+                                <Const ConstValue="'1997-01-01 00:00:00.000'" />
+                              </ScalarOperator>
+                            </Compare>
+                          </ScalarOperator>
+                          <ScalarOperator>
+                            <Compare CompareOp="LE">
+                              <ScalarOperator>
+                                <Identifier>
+                                  <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Orders]" Column="OrderDate" />
+                                </Identifier>
+                              </ScalarOperator>
+                              <ScalarOperator>
+                                <Const ConstValue="'1997-12-31 00:00:00.000'" />
+                              </ScalarOperator>
+                            </Compare>
+                          </ScalarOperator>
+                        </Logical>
+                      </ScalarOperator>
+                    </Predicate>
+                  </IndexScan>
+                </RelOp>
+              </NestedLoops>
+            </RelOp>
+          </QueryPlan>
+        </StmtSimple>
+      </Statements>
+    </Batch>
+  </BatchSequence>
+</ShowPlanXML>

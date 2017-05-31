@@ -1,4 +1,4 @@
-use lab_3_2
+﻿use lab_3_2
 set dateformat dmy
 
 DROP FUNCTION id_of_sex

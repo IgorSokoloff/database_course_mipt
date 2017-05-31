@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<ShowPlanXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.2" Build="11.0.5058.0" xmlns="http://schemas.microsoft.com/sqlserver/2004/07/showplan">
+  <BatchSequence>
+    <Batch>
+      <Statements>
+        <StmtSimple StatementCompId="1" StatementEstRows="3.32143" StatementId="1" StatementOptmLevel="TRIVIAL" StatementSubTreeCost="0.0304091" StatementText="select * from customers where (CustomerID like 'R%') and (region is not null) and (Country = 'usa')&#xD;&#xA;" StatementType="SELECT" QueryHash="0x28CE6658A0C00E6A" QueryPlanHash="0x9EDEC10E2A684D16" RetrievedFromCache="true">
+          <StatementSetOptions ANSI_NULLS="true" ANSI_PADDING="true" ANSI_WARNINGS="true" ARITHABORT="true" CONCAT_NULL_YIELDS_NULL="true" NUMERIC_ROUNDABORT="false" QUOTED_IDENTIFIER="true" />
+          <QueryPlan DegreeOfParallelism="1" CachedPlanSize="24" CompileTime="0" CompileCPU="0" CompileMemory="176">
+            <MemoryGrantInfo SerialRequiredMemory="0" SerialDesiredMemory="0" />
+            <OptimizerHardwareDependentProperties EstimatedAvailableMemoryGrant="208277" EstimatedPagesCached="52069" EstimatedAvailableDegreeOfParallelism="2" />
+            <RelOp AvgRowSize="286" EstimateCPU="0.0012797" EstimateIO="0.0291294" EstimateRebinds="0" EstimateRewinds="0" EstimatedExecutionMode="Row" EstimateRows="3.32143" LogicalOp="Table Scan" NodeId="0" Parallel="false" PhysicalOp="Table Scan" EstimatedTotalSubtreeCost="0.0304091" TableCardinality="1092">
+              <OutputList>
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CustomerID" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CompanyName" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="ContactName" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="ContactTitle" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Address" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="City" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Region" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="PostalCode" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Country" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Phone" />
+                <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Fax" />
+              </OutputList>
+              <RunTimeInformation>
+                <RunTimeCountersPerThread Thread="0" ActualRows="12" ActualEndOfScans="1" ActualExecutions="1" />
+              </RunTimeInformation>
+              <TableScan Ordered="false" ForcedIndex="false" ForceScan="false" NoExpandHint="false">
+                <DefinedValues>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CustomerID" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CompanyName" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="ContactName" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="ContactTitle" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Address" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="City" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Region" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="PostalCode" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Country" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Phone" />
+                  </DefinedValue>
+                  <DefinedValue>
+                    <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Fax" />
+                  </DefinedValue>
+                </DefinedValues>
+                <Object Database="[lab_10]" Schema="[dbo]" Table="[Customers]" IndexKind="Heap" />
+                <Predicate>
+                  <ScalarOperator ScalarString="[lab_10].[dbo].[Customers].[Country]=N'usa' AND [lab_10].[dbo].[Customers].[Region] IS NOT NULL AND [lab_10].[dbo].[Customers].[CustomerID] like N'R%'">
+                    <Logical Operation="AND">
+                      <ScalarOperator>
+                        <Compare CompareOp="EQ">
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Country" />
+                            </Identifier>
+                          </ScalarOperator>
+                          <ScalarOperator>
+                            <Const ConstValue="N'usa'" />
+                          </ScalarOperator>
+                        </Compare>
+                      </ScalarOperator>
+                      <ScalarOperator>
+                        <Compare CompareOp="IS NOT">
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="Region" />
+                            </Identifier>
+                          </ScalarOperator>
+                          <ScalarOperator>
+                            <Const ConstValue="NULL" />
+                          </ScalarOperator>
+                        </Compare>
+                      </ScalarOperator>
+                      <ScalarOperator>
+                        <Intrinsic FunctionName="like">
+                          <ScalarOperator>
+                            <Identifier>
+                              <ColumnReference Database="[lab_10]" Schema="[dbo]" Table="[Customers]" Column="CustomerID" />
+                            </Identifier>
+                          </ScalarOperator>
+                          <ScalarOperator>
+                            <Const ConstValue="N'R%'" />
+                          </ScalarOperator>
+                        </Intrinsic>
+                      </ScalarOperator>
+                    </Logical>
+                  </ScalarOperator>
+                </Predicate>
+              </TableScan>
+            </RelOp>
+          </QueryPlan>
+        </StmtSimple>
+      </Statements>
+    </Batch>
+  </BatchSequence>
+</ShowPlanXML>
