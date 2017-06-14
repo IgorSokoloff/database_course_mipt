@@ -5,5 +5,5 @@
 
 За основу был взят [сайт](http://v-open.spb.ru/).
 
-Схема проекттировалась с учетом [правил проведения турниров и подсчета очков](http://v-open.spb.ru/terms-and-conditions-of-the-championship.html#5)
+Схема проекттировалась с учетом [правил проведения турниров и подсчета очков](http://v-open.spb.ru/terms-and-conditions-of-the-championship.html#5).
 ![alt text](DB_13_03.png)
